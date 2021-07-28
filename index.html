@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js"></script>
+</head>
+<body>
+    
+    <input type="text" id="r1c1" onclick=
+    "box1(); checkWinner();" readonly>
+
+    <input type="text" id="r1c2" onclick=
+    "box2(); checkWinner();" readonly>
+
+    <input type="text" id="r1c3" onclick=
+    "box3(); checkWinner();" readonly>
+    <br><br>
+
+    <input type="text" id="r2c1" onclick=
+    "box4(); checkWinner();" readonly>
+      
+    <input type="text" id="r2c2" onclick=
+    "box5(); checkWinner();" readonly>
+
+    <input type="text" id="r2c3" onclick=
+    "box6(); checkWinner();" readonly>
+    <br><br>
+
+    <input type="text" id="r3c1" onclick=
+    "box7(); checkWinner();" readonly>
+
+    <input type="text" id="r3c2" onclick=
+    "box8();checkWinner();" readonly>
+
+    <input type="text" id="r3c3" onclick=
+    "box9();checkWinner();" readonly>
+
+    <!-- Grid end here  -->
+    <br><br><br>
+    <!-- Button to reset game -->
+    <button id="but" onclick="resetBox()">
+        RESET
+    </button>
+
+    <br><br>
+    <!-- Space to show player turn -->
+    <p id="print"></p>
+
+</body>
+</html>
