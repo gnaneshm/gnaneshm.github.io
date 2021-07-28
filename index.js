@@ -1,7 +1,7 @@
-// Function called whenever user tab on any box
+// Checking Winner condition
 function checkWinner() {
   
-    // Setting DOM to all boxes or input field
+    // getting value of all the boxes
     var r1c1, r1c2, r1c3, r2c1, r2c2, r2c3, r3c1, r3c2, r3c3;
     r1c1 = document.getElementById("r1c1").value;
     r1c2 = document.getElementById("r1c2").value;
@@ -13,11 +13,9 @@ function checkWinner() {
     r3c2 = document.getElementById("r3c2").value;
     r3c3 = document.getElementById("r3c3").value;
 
-    // Checking if Player X won or not and after 
-    // that disabled all the other fields
+    // Checking winning condition for player X
     if (r1c1 == 'X' && r1c2 == 'X' && r1c3 == 'X') {
-        document.getElementById('print')
-            .innerHTML = "Player X won";
+        document.getElementById('print').innerHTML = "Player X won";
         document.getElementById("r2c1").disabled = true;
         document.getElementById("r2c2").disabled = true;
         document.getElementById("r2c3").disabled = true;
@@ -105,9 +103,7 @@ function checkWinner() {
     window.alert('Player X won');
     }
 
-    // Checking of Player X finsh
-    // Checking for Player 0 starts, Is player 0 won or
-    // not and after that disabled all the other fields
+    // Checking Winning Condition for Player 0
     else if (r1c1 == '0' && r1c2 == '0' && r1c3 == '0') {
         document.getElementById('print')
             .innerHTML = "Player 0 won";
@@ -197,49 +193,33 @@ function checkWinner() {
         window.alert('Player 0 won');
     }
   
-    // Checking of Player 0 finsh
-    // Here, Checking about Tie
+    // Tie Condition
     else if ((r1c1 == 'X' || r1c1 == '0') && (r1c2 == 'X' 
         || r1c2 == '0') && (r1c3 == 'X' || r1c3 == '0') && 
         (r2c1 == 'X' || r2c1 == '0') && (r2c2 == 'X' || 
         r2c2 == '0') && (r2c3 == 'X' || r2c3 == '0') && 
         (r3c1 == 'X' || r3c1 == '0') && (r3c2 == 'X' || 
         r3c2 == '0') && (r3c3 == 'X' || r3c3 == '0')) {
-            document.getElementById('print')
-                .innerHTML = "Match Tie";
+            document.getElementById('print').innerHTML = "Match Tie";
             window.alert('Match Tie');
     }
     else {
-  
-        // Here, Printing Result
+        // Current Players Turn
         if (flag == 1) {
-            document.getElementById('print')
-                .innerHTML = "Player X Turn";
+            document.getElementById('print').innerHTML = "Player X Turn";
         }
         else {
-            document.getElementById('print')
-                .innerHTML = "Player 0 Turn";
+            document.getElementById('print').innerHTML = "Player 0 Turn";
         }
     }
 }
   
-// Function to reset game
+// resetting the game
 function resetBox() {
     location.reload();
-    // document.getElementById('r1c1').value = '';
-    // document.getElementById("r1c2").value = '';
-    // document.getElementById("r1c3").value = '';
-    // document.getElementById("r2c1").value = '';
-    // document.getElementById("r2c2").value = '';
-    // document.getElementById("r2c3").value = '';
-    // document.getElementById("r3c1").value = '';
-    // document.getElementById("r3c2").value = '';
-    // document.getElementById("r3c3").value = '';
-  
 }
 
-// Here onwards, functions check turn of the player 
-// and put accordingly value X or 0
+// Checking turn of the players, flag=1, indicates player 'X' turns, and '0' indicates player '0' turns
 flag = 1;
 function box1() {
     if (flag == 1) {
