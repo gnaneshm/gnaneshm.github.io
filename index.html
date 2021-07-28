@@ -9,46 +9,53 @@
     <script src="./index.js"></script>
 </head>
 <body>
+    <div class="center-text">
+        <h1>Basic Tic Tac Toe Game</h1>
+    </div>
     
-    <input type="text" id="r1c1" onclick=
-    "box1(); checkWinner();" readonly>
-
-    <input type="text" id="r1c2" onclick=
-    "box2(); checkWinner();" readonly>
-
-    <input type="text" id="r1c3" onclick=
-    "box3(); checkWinner();" readonly>
-    <br><br>
-
-    <input type="text" id="r2c1" onclick=
-    "box4(); checkWinner();" readonly>
-      
-    <input type="text" id="r2c2" onclick=
-    "box5(); checkWinner();" readonly>
-
-    <input type="text" id="r2c3" onclick=
-    "box6(); checkWinner();" readonly>
-    <br><br>
-
-    <input type="text" id="r3c1" onclick=
-    "box7(); checkWinner();" readonly>
-
-    <input type="text" id="r3c2" onclick=
-    "box8();checkWinner();" readonly>
-
-    <input type="text" id="r3c3" onclick=
-    "box9();checkWinner();" readonly>
-
-    <!-- Grid end here  -->
-    <br><br><br>
-    <!-- Button to reset game -->
-    <button id="but" onclick="resetBox()">
-        RESET
-    </button>
-
-    <br><br>
-    <!-- Space to show player turn -->
-    <p id="print"></p>
+    <div class="center-content">
+        <div class="boxes">
+            <input type="text" id="r1c1" onclick=
+            "box1(); checkWinner();" readonly>
+    
+            <input type="text" id="r1c2" onclick=
+            "box2(); checkWinner();" readonly>
+        
+            <input type="text" id="r1c3" onclick=
+            "box3(); checkWinner();" readonly>
+            <br><br>
+        
+            <input type="text" id="r2c1" onclick=
+            "box4(); checkWinner();" readonly>
+            
+            <input type="text" id="r2c2" onclick=
+            "box5(); checkWinner();" readonly>
+        
+            <input type="text" id="r2c3" onclick=
+            "box6(); checkWinner();" readonly>
+            <br><br>
+        
+            <input type="text" id="r3c1" onclick=
+            "box7(); checkWinner();" readonly>
+        
+            <input type="text" id="r3c2" onclick=
+            "box8();checkWinner();" readonly>
+        
+            <input type="text" id="r3c3" onclick=
+            "box9();checkWinner();" readonly>
+        
+            <!-- Grid end here  -->
+            <br><br><br>
+            <!-- Button to reset game -->
+            <button id="but" onclick="resetBox()">
+                RESET
+            </button>
+        
+            <br><br>
+            <!-- Space to show player turn -->
+            <p id="print"></p>
+        </div>  
+    </div>
 
 </body>
 </html>

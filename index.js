@@ -1,6 +1,5 @@
 // Checking Winner condition
 function checkWinner() {
-  
     // getting value of all the boxes
     var r1c1, r1c2, r1c3, r2c1, r2c2, r2c3, r3c1, r3c2, r3c3;
     r1c1 = document.getElementById("r1c1").value;
@@ -213,7 +212,7 @@ function checkWinner() {
         }
     }
 }
-  
+
 // resetting the game
 function resetBox() {
     location.reload();
@@ -338,6 +337,7 @@ function box9() {
     }
 }
 
+  
   
 
 
