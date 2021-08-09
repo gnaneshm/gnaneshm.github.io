@@ -1,17 +1,68 @@
-input{
-    cursor:pointer;
-    width: 50px;
-    height:50px;
-    text-align:center;
+* {
+	margin: 0;
 }
-input:disabled{
-    border:1px solid black;
+#header-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.center-text{
-    text-align: center;
+#tictactoe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.center-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+table, 
+td, 
+tr {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 100px;
+}
+
+td:hover {
+  background: rgb(126, 196, 196);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.tile {
+  font-size: 50px;
+  height: 80px;
+  width: 80px;
+  text-align: center;
+}
+
+/* Message Box */
+.message-box {
+  margin: 10px auto;
+}
+
+/* Player Buttons */
+#pick-player{
+  margin: 10px;
+}
+#pick-player button{
+  padding: 3px 20px;
+}
+/* Restart Button */
+#restartButton{
+  margin: 10px;
+  padding: 2px 10px;
+}
+/* Game state classes */
+/* .inactive {
+  pointer-events: none;
+}
+
+.hide-element {
+  display: none;
+  opacity: 0;
+  height: 0;
+  transition: visibility 5s, opacity 0.5s linear;
+} */
+
+button {
+  cursor: pointer;
 }
