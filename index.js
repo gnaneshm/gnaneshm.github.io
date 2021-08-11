@@ -71,11 +71,11 @@ function Player (symbol) {
      return result;
    },
  
-   checkBox: function(a, b, c, move) {
+   checkBox: function(a, b, c, symbol) {
      let result = false;
-     if (this.getBox(a) == move &&
-         this.getBox(b) == move &&
-         this.getBox(c) == move) {
+     if (this.getBox(a) == symbol &&
+         this.getBox(b) == symbol &&
+         this.getBox(c) == symbol) {
        result = true;
      }
      return result;
