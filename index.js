@@ -8,7 +8,7 @@ function Player (symbol) {
    this.text = text || '';
  }
  
-//  Using Object Oriented design paradigm to create Tic Tac Toe Game class
+//Design paradigm - Using Object Oriented design paradigm to create Tic Tac Toe Game class
  var TicTacToeGame = {
    gameInProgress: false,
    firstPlayer: null,
@@ -120,17 +120,19 @@ function Player (symbol) {
      TicTacToeGame.gameInProgress  = true;
     //  view.renderConfig(3);
    },
- 
+   
+  //  Observer pattern: here created a subscription model and get notified when click event occurs
    boxClick: function(event) {
      if (!TicTacToeGame.gameInProgress) return;
      
-     let clickedTileIndex = event.target.id,
-      clickedTile = TicTacToeGame.boxes[clickedTileIndex];
+     let clickedBoxIndex = event.target.id,
+      clickedBox = TicTacToeGame.boxes[clickedBoxIndex];
      
-     if (!clickedTile.isTaken) {
-       clickedTile.isTaken = true;
-       clickedTile.text = TicTacToeGame.currentPlayer.symbol;
-       view.markTheBox(TicTacToeGame.currentPlayer.symbol, clickedTileIndex);
+      // Singleton pattern : using singleton pattern to see each Box is clicked only
+     if (!clickedBox.isTaken) {
+       clickedBox.isTaken = true;
+       clickedBox.text = TicTacToeGame.currentPlayer.symbol;
+       view.markTheBox(TicTacToeGame.currentPlayer.symbol, clickedBoxIndex);
        TicTacToeGame.switchTurn();
        TicTacToeGame.shouldGameContinue();
      }
