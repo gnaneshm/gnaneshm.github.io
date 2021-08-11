@@ -1,21 +1,21 @@
 // function to initalize players
-function Player (icon) {
-    this.icon = icon;
+function Player (symbol) {
+    this.symbol = symbol;
  }
-//  function to initialize tiles
- function Tile (isTaken, text) {
+//  function to initialize boxes
+ function Box (isTaken, text) {
    this.isTaken = isTaken || false;
    this.text = text || '';
  }
  
-//  creating game object
- var game = {
+//  Using Object Oriented design paradigm to create Tic Tac Toe Game class
+ var TicTacToeGame = {
    gameInProgress: false,
-   playerOdd: null,
-   playerEven: null,
+   firstPlayer: null,
+   secondPlayer: null,
    currentPlayer: null,
    winner: false,
-   tiles: [{
+   boxes: [{
      isTaken: false,
      text: '' // 'x' or 'o'
    }, {
@@ -46,56 +46,56 @@ function Player (icon) {
    
    shouldGameContinue: function() {
      let result = true;
-     icon = this.currentPlayer.icon;
+     symbol = this.currentPlayer.symbol;
      if (
-       // horizontal tiles
-       this.checkTiles(0, 1, 2, icon) ||
-       this.checkTiles(3, 4, 5, icon) ||
-       this.checkTiles(6, 7, 8, icon) ||
-       // vertical tiles
-       this.checkTiles(0, 3, 6, icon) ||
-       this.checkTiles(1, 4, 7, icon) ||
-       this.checkTiles(2, 5, 8, icon) ||
-       // diagonal tiles
-       this.checkTiles(0, 4, 8, icon) ||
-       this.checkTiles(2, 4, 6, icon)) {
+       // horizontal boxes
+       this.checkBox(0, 1, 2, symbol) ||
+       this.checkBox(3, 4, 5, symbol) ||
+       this.checkBox(6, 7, 8, symbol) ||
+       // vertical boxes
+       this.checkBox(0, 3, 6, symbol) ||
+       this.checkBox(1, 4, 7, symbol) ||
+       this.checkBox(2, 5, 8, symbol) ||
+       // diagonal boxes
+       this.checkBox(0, 4, 8, symbol) ||
+       this.checkBox(2, 4, 6, symbol)) {
        result = false;
        this.winner = true;
-       view.showWinner(icon);
-     } else if (game.tiles.every(tile => tile.isTaken === true) && this.winner === true) {
-       view.showWinner(icon);
-     } else  if (game.tiles.every(tile => tile.isTaken === true)) {
+       view.showWinner(symbol);
+     } else if (TicTacToeGame.boxes.every(tile => tile.isTaken === true) && this.winner === true) {
+       view.showWinner(symbol);
+     } else  if (TicTacToeGame.boxes.every(tile => tile.isTaken === true)) {
        view.showWinner("Nobody ");
      } 
      this.gameInProgress = result;
      return result;
    },
  
-   checkTiles: function(a, b, c, move) {
+   checkBox: function(a, b, c, move) {
      let result = false;
-     if (this.getTile(a) == move &&
-         this.getTile(b) == move &&
-         this.getTile(c) == move) {
+     if (this.getBox(a) == move &&
+         this.getBox(b) == move &&
+         this.getBox(c) == move) {
        result = true;
      }
      return result;
    },
  
-   getTile: function(number) {
-     return this.tiles[number].text;
+   getBox: function(number) {
+     return this.boxes[number].text;
    },
 
    switchTurn: function() {
      this.shouldGameContinue();
      
-     if (this.currentPlayer === this.playerOdd) {
-       this.currentPlayer = this.playerEven;
+     if (this.currentPlayer === this.firstPlayer) {
+       this.currentPlayer = this.secondPlayer;
      } else {
-       this.currentPlayer = this.playerOdd;
+       this.currentPlayer = this.firstPlayer;
      }
      
      if (this.currentPlayer) {
-       view.setMessage("It's player " + game.currentPlayer.icon + "'s turn.");
+       view.setMessage("It's player " + TicTacToeGame.currentPlayer.symbol + "'s turn.");
      }
    },
  };
@@ -103,42 +103,42 @@ function Player (icon) {
 // Event Handlers set Players, Opponents
  var handlers = {
    setStartingPlayer: function(event) {
-     game.playerOdd = new Player(event.target.value);
-     game.currentPlayer = game.playerOdd;
-     game.gameInProgress  = true;
-     if (game.playerOdd.icon === 'X') {
-       game.playerEven = new Player('O');
+    TicTacToeGame.firstPlayer = new Player(event.target.value);
+    TicTacToeGame.currentPlayer = TicTacToeGame.firstPlayer;
+    TicTacToeGame.gameInProgress  = true;
+     if (TicTacToeGame.firstPlayer.symbol === 'X') {
+      TicTacToeGame.secondPlayer = new Player('O');
      } else {
-       game.playerEven = new Player('X');
+      TicTacToeGame.secondPlayer = new Player('X');
      }
    },
  
    setOpponent: function(event) {
-     game.playerEven = new Player(game.playerEven.icon); if ( game.playerOdd.icon === "X") {
-       game.playerEven.icon = "O";
+    TicTacToeGame.secondPlayer = new Player(TicTacToeGame.secondPlayer.symbol); if ( TicTacToeGame.firstPlayer.symbol === "X") {
+      TicTacToeGame.secondPlayer.symbol = "O";
      } 
-     game.gameInProgress  = true;
+     TicTacToeGame.gameInProgress  = true;
     //  view.renderConfig(3);
    },
  
-   tileClick: function(event) {
-     if (!game.gameInProgress) return;
+   boxClick: function(event) {
+     if (!TicTacToeGame.gameInProgress) return;
      
      let clickedTileIndex = event.target.id,
-              clickedTile = game.tiles[clickedTileIndex];
+      clickedTile = TicTacToeGame.boxes[clickedTileIndex];
      
      if (!clickedTile.isTaken) {
        clickedTile.isTaken = true;
-       clickedTile.text    = game.currentPlayer.icon;
-       view.XorYinTile(game.currentPlayer.icon, clickedTileIndex);
-       game.switchTurn();
-       game.shouldGameContinue();
+       clickedTile.text = TicTacToeGame.currentPlayer.symbol;
+       view.markTheBox(TicTacToeGame.currentPlayer.symbol, clickedTileIndex);
+       TicTacToeGame.switchTurn();
+       TicTacToeGame.shouldGameContinue();
      }
    },
  };
  
 // Dynamically creating Table, message box and select Players buttons
- var templates = {
+ var dynamicHtmlContents = {
    playerButtonTemplate: function () {
      return (
        `<div id="pick-player">
@@ -159,19 +159,19 @@ function Player (icon) {
    renderTable() {
      return (
          `<tr>
-           <td class="tile" onclick="handlers.tileClick(event)" id="0"></td>
-           <td class="tile" onclick="handlers.tileClick(event)" id="1"></td>
-           <td class="tile" onclick="handlers.tileClick(event)" id="2"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="0"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="1"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="2"></td>
          </tr>
          <tr>
-           <td class="tile" onclick="handlers.tileClick(event)" id="3"></td>
-           <td class="tile" onclick="handlers.tileClick(event)" id="4"></td>
-           <td class="tile" onclick="handlers.tileClick(event)" id="5"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="3"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="4"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="5"></td>
          </tr>
          <tr>
-           <td class="tile" onclick="handlers.tileClick(event)" id="6"></td>
-           <td class="tile" onclick="handlers.tileClick(event)" id="7"></td>
-           <td class="tile" onclick="handlers.tileClick(event)" id="8"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="6"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="7"></td>
+           <td class="tile" onclick="handlers.boxClick(event)" id="8"></td>
          </tr>
         `
      )
@@ -188,33 +188,31 @@ function Player (icon) {
    
    setupBoard: function() {
      this.renderConfig(1);
-     this.gameBoard.innerHTML = templates.renderTable();
-     
+     this.gameBoard.innerHTML = dynamicHtmlContents.renderTable();
      tictactoe.appendChild(this.messageBox);
      tictactoe.appendChild(this.playerButtons);
      tictactoe.appendChild(this.gameBoard);
-     tictactoe.appendChild(templates.restartButtonTemplate());
+     tictactoe.appendChild(dynamicHtmlContents.restartButtonTemplate());
    },
    
    renderConfig: function (step) {
-     
      this.configStep = step;
      switch(view.configStep) {
        case 1:
-         this.setMessage("Welcome, to begin please pick a player");
-         this.playerButtons.innerHTML = templates.playerButtonTemplate();
+         this.setMessage("Please select a player X or O");
+         this.playerButtons.innerHTML = dynamicHtmlContents.playerButtonTemplate();
          break;
        default:
          // no opponent
      }
    },
    
-   showWinner: function (icon) {
-     window.alert(icon + " wins!");
+   showWinner: function (symbol) {
+     window.alert(symbol + " wins!");
      this.restartGame();
    },
  
-   XorYinTile: function(mark, index) {
+   markTheBox: function(mark, index) {
      document.getElementById(index).innerText = mark;
      document.getElementById(index).classList.add("inactive");
    },
@@ -224,17 +222,17 @@ function Player (icon) {
    },
    
    restartGame: function() {
-     let tiles = game.tiles;
-     game.gameInProgress = false;
-     game.playerOdd = null;
-     game.playerEven = null;
-     view.setMessage("Please select a player to start the game.");
-     game.winner = false;
+     let boxes = TicTacToeGame.boxes;
+     TicTacToeGame.gameInProgress = false;
+     TicTacToeGame.firstPlayer = null;
+     TicTacToeGame.secondPlayer = null;
+    //  view.setMessage("Please select a player to start the game.");
+     TicTacToeGame.winner = false;
      
-     // Gameboard tiles
-     for (var i = 0; i < tiles.length; i++) {
-       tiles[i].isTaken = false;
-       tiles[i].text = '';
+     // Gameboard boxes
+     for (var i = 0; i < boxes.length; i++) {
+       boxes[i].isTaken = false;
+       boxes[i].text = '';
        document.getElementById(i).innerText = '';
        document.getElementById(i).classList.remove('inactive');
      }
